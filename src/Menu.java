@@ -2,6 +2,14 @@ import java.util.Scanner;
 
 public class Menu {
     static Scanner input = new Scanner(System.in);
+    public final int themNhanVien = 1;
+    public final int suaNhanVien = 2;
+    public final int saThaiNhanVien = 3;
+    public final int hienThiLuongTheoTen = 4;
+    public final int timKiem = 5;
+    public final int sapXep = 6;
+    public final int hienThiTatCa = 7;
+    public final int thoat = 8;
 
     public static void menu() {
         while (true) {
@@ -17,14 +25,14 @@ public class Menu {
                 System.out.println("8. Thoat");
                 int choice = Integer.parseInt(input.nextLine());
                 switch (choice) {
-                    case 1 -> QLNV.add();
-                    case 2 -> QLNV.edit();
-                    case 3 -> QLNV.fireNhanVien();
-                    case 4 -> QLNV.printSalaryByName();
-                    case 5 -> QLNV.searchByName();
-                    case 6 -> QLNV.sortByName();
-                    case 7 -> QLNV.showAll();
-                    case 8 -> {
+                    case themNhanVien -> QLNV.add();
+                    case suaNhanVien -> QLNV.edit();
+                    case saThaiNhanVien -> QLNV.fireNhanVien();
+                    case hienThiLuongTheoTen -> QLNV.printSalaryByName();
+                    case timKiem -> QLNV.searchByName();
+                    case sapXep -> QLNV.sortByName();
+                    case hienThiTatCa -> QLNV.showAll();
+                    case thoat -> {
                         System.out.println("Thoat khoi he thong");
                         System.exit(0);
                     }
