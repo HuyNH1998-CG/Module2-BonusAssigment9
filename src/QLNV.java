@@ -4,6 +4,11 @@ import java.util.Scanner;
 public class QLNV {
     static Scanner input = new Scanner(System.in);
     static ArrayList<NhanVien> CodeGym = new ArrayList<>();
+    public static final int nhanVienDaoTao = 1;
+    public static final int nhanVienDaoTaoFullTime = 1;
+    public static final int nhanVienDaoTaoPartTime = 2;
+    public static final int nhanVienTuyenSinh = 2;
+    public static final int tuoiGioiHan = 18;
 
     public static void add() {
         System.out.println("Them Nhan Vien Moi");
@@ -18,20 +23,20 @@ public class QLNV {
         System.out.println("2. Nhan Vien Tuyen Sinh");
         int choice = Integer.parseInt(input.nextLine());
         switch (choice) {
-            case 1 -> {
+            case nhanVienDaoTao -> {
                 System.out.println("1. Nhan Vien Dao Tao Full-Time");
                 System.out.println("2. Nhan Vien Dao Tao Part-Time");
                 int choice2 = Integer.parseInt(input.nextLine());
                 switch (choice2) {
-                    case 1 -> CodeGym.add(new NhanVienDaoTaoFullTime(name, age, gender, phoneNum, email, salary));
-                    case 2 -> {
+                    case nhanVienDaoTaoFullTime -> CodeGym.add(new NhanVienDaoTaoFullTime(name, age, gender, phoneNum, email, salary));
+                    case nhanVienDaoTaoPartTime -> {
                         System.out.println("Nhap so gio nhan vien nay da lam");
                         long workedHour = Long.parseLong(input.nextLine());
                         CodeGym.add(new NhanVienDaoTaoPartTime(name, age, gender, phoneNum, email, salary, workedHour));
                     }
                 }
             }
-            case 2 -> {
+            case nhanVienTuyenSinh -> {
                 System.out.println("Nhap so luong ma nhan vien nay da tuyen sinh duoc");
                 long recruitedAmount = Long.parseLong(input.nextLine());
                 CodeGym.add(new NhanVienTuyenSinh(name, age, gender, phoneNum, email, salary, recruitedAmount));
@@ -63,7 +68,7 @@ public class QLNV {
         int choice = Integer.parseInt(input.nextLine());
         String name = getTenNhanVien();
         switch (choice) {
-            case 1 -> {
+            case nhanVienDaoTao -> {
                 for (int i = 0; i < CodeGym.size(); i++) {
                     if (CodeGym.get(i) instanceof NhanVienDaoTao) {
                         if (CodeGym.get(i).getName().equals(name)) {
@@ -73,7 +78,7 @@ public class QLNV {
                     }
                 }
             }
-            case 2 -> {
+            case nhanVienTuyenSinh -> {
                 for (int i = 0; i < CodeGym.size(); i++) {
                     if (CodeGym.get(i) instanceof NhanVienTuyenSinh) {
                         if (CodeGym.get(i).getName().equals(name)) {
@@ -162,7 +167,7 @@ public class QLNV {
                 System.out.println("Nhap Tuoi");
                 int age = input.nextInt();
                 input.nextLine();
-                if (age < 18) {
+                if (age < tuoiGioiHan) {
                     throw new Under18();
                 } else {
                     return age;
