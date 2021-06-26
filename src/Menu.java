@@ -2,14 +2,14 @@ import java.util.Scanner;
 
 public class Menu {
     static Scanner input = new Scanner(System.in);
-    public final int themNhanVien = 1;
-    public final int suaNhanVien = 2;
-    public final int saThaiNhanVien = 3;
-    public final int hienThiLuongTheoTen = 4;
-    public final int timKiem = 5;
-    public final int sapXep = 6;
-    public final int hienThiTatCa = 7;
-    public final int thoat = 8;
+    public static final int themNhanVien = 1;
+    public static final int suaNhanVien = 2;
+    public static final int saThaiNhanVien = 3;
+    public static final int hienThiLuongTheoTen = 4;
+    public static final int timKiem = 5;
+    public static final int sapXep = 6;
+    public static final int hienThiTatCa = 7;
+    public static final int thoat = 8;
 
     public static void menu() {
         while (true) {
