@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class QLNV {
@@ -11,7 +12,10 @@ public class QLNV {
     public static final int tuoiGioiHan = 18;
 
     public static void add() {
-        System.out.println("Them Nhan Vien Moi");
+        CodeGym.add(createNhanVien());
+    }
+
+    public static NhanVien createNhanVien() {
         String name = getTenNhanVien();
         int age = getAge();
         String gender = getGender();
@@ -21,38 +25,42 @@ public class QLNV {
         System.out.println("Nhan Vien nay la");
         System.out.println("1. Nhan Vien Dao Tao");
         System.out.println("2. Nhan Vien Tuyen Sinh");
-        int choice = Integer.parseInt(input.nextLine());
-        switch (choice) {
-            case nhanVienDaoTao -> {
-                System.out.println("1. Nhan Vien Dao Tao Full-Time");
-                System.out.println("2. Nhan Vien Dao Tao Part-Time");
-                int choice2 = Integer.parseInt(input.nextLine());
-                switch (choice2) {
-                    case nhanVienDaoTaoFullTime -> CodeGym.add(new NhanVienDaoTaoFullTime(name, age, gender, phoneNum, email, salary));
-                    case nhanVienDaoTaoPartTime -> {
-                        System.out.println("Nhap so gio nhan vien nay da lam");
-                        long workedHour = Long.parseLong(input.nextLine());
-                        CodeGym.add(new NhanVienDaoTaoPartTime(name, age, gender, phoneNum, email, salary, workedHour));
+        while (true) {
+            int choice = Integer.parseInt(input.nextLine());
+            switch (choice) {
+                case nhanVienDaoTao -> {
+                    System.out.println("1. Nhan Vien Dao Tao Full-Time");
+                    System.out.println("2. Nhan Vien Dao Tao Part-Time");
+                    int choice2 = Integer.parseInt(input.nextLine());
+                    switch (choice2) {
+                        case nhanVienDaoTaoFullTime -> {
+                            return new NhanVienDaoTaoFullTime(name, age, gender, phoneNum, email, salary);
+                        }
+                        case nhanVienDaoTaoPartTime -> {
+                            System.out.println("Nhap so gio nhan vien nay da lam");
+                            long workedHour = Long.parseLong(input.nextLine());
+                            return new NhanVienDaoTaoPartTime(name, age, gender, phoneNum, email, salary, workedHour);
+                        }
+                        default -> System.out.println("Chon sai kieu nhan vien, chon lai");
                     }
                 }
-            }
-            case nhanVienTuyenSinh -> {
-                System.out.println("Nhap so luong ma nhan vien nay da tuyen sinh duoc");
-                long recruitedAmount = Long.parseLong(input.nextLine());
-                CodeGym.add(new NhanVienTuyenSinh(name, age, gender, phoneNum, email, salary, recruitedAmount));
+                case nhanVienTuyenSinh -> {
+                    System.out.println("Nhap so luong ma nhan vien nay da tuyen sinh duoc");
+                    long recruitedAmount = Long.parseLong(input.nextLine());
+                    return new NhanVienTuyenSinh(name, age, gender, phoneNum, email, salary, recruitedAmount);
+                }
+                default -> System.out.println("Chon sai kieu nhan vien, chon lai");
             }
         }
     }
 
-//    public static void edit(){
-//        System.out.println("Nhap ten nhan vien can sua");
-//        String name = getTenNhanVien();
-//        for (NhanVien N : CodeGym){
-//            if (N.getName().equals(name)){
-//                N.setSalary(getSalary());
-//            }
-//        }
-//    }
+    public static void edit() {
+        System.out.println("Nhap ten nhan vien can sua");
+        String name = getTenNhanVien();
+        NameSorter nameSorter = new NameSorter();
+        int index = Collections.binarySearch(CodeGym, new NhanVien(name, 0, null, null, null, 0), nameSorter);
+        CodeGym.set(index, createNhanVien());
+    }
 
 
     public static void showAll() {
@@ -91,25 +99,25 @@ public class QLNV {
         }
     }
 
-    public static void searchByName(){
+    public static void searchByName() {
         String name = getTenNhanVien();
-        for (NhanVien N : CodeGym){
-            if(N.getName().equals(name)){
+        for (NhanVien N : CodeGym) {
+            if (N.getName().equals(name)) {
                 System.out.println(N);
             }
         }
     }
 
-    public static void sortByName(){
+    public static void sortByName() {
         NameSorter nameSorter = new NameSorter();
         CodeGym.sort(nameSorter);
     }
 
 
-    public static void printSalaryByName(){
+    public static void printSalaryByName() {
         String name = getTenNhanVien();
-        for (NhanVien N : CodeGym){
-            if(N.getName().equals(name)){
+        for (NhanVien N : CodeGym) {
+            if (N.getName().equals(name)) {
                 System.out.println(N.getName() + " luong: " + N.getTotalSalary());
             }
         }
