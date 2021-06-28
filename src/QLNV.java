@@ -61,6 +61,7 @@ public class QLNV {
         NameSorter nameSorter = new NameSorter();
         int index = Collections.binarySearch(CodeGym, new NhanVien(name, 0, null, null, null, 0), nameSorter);
         CodeGym.set(index, createNhanVien());
+        IOOperator.writeToFile("src/list.txt",CodeGym);
     }
 
 
@@ -86,6 +87,7 @@ public class QLNV {
                         }
                     }
                 }
+                IOOperator.writeToFile("src/list.txt",CodeGym);
             }
             case nhanVienTuyenSinh -> {
                 for (int i = 0; i < CodeGym.size(); i++) {
@@ -96,6 +98,7 @@ public class QLNV {
                         }
                     }
                 }
+                IOOperator.writeToFile("src/list.txt",CodeGym);
             }
         }
     }
