@@ -1,4 +1,6 @@
-public class NhanVien {
+import java.io.Serializable;
+
+public class NhanVien implements Serializable {
     private String name;
     private int age;
     private String gender;

@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class QLNV {
     static Scanner input = new Scanner(System.in);
-    static ArrayList<NhanVien> CodeGym = new ArrayList<>();
+    static ArrayList<NhanVien> CodeGym = IOOperator.readDataFromFile("src/list.txt");
     public static final int nhanVienDaoTao = 1;
     public static final int nhanVienDaoTaoFullTime = 1;
     public static final int nhanVienDaoTaoPartTime = 2;
@@ -13,6 +13,7 @@ public class QLNV {
 
     public static void add() {
         CodeGym.add(createNhanVien());
+        IOOperator.writeToFile("src/list.txt",CodeGym);
     }
 
     public static NhanVien createNhanVien() {
