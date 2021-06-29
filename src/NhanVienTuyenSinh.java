@@ -1,7 +1,7 @@
 public class NhanVienTuyenSinh extends NhanVien {
     private long recruitedAmount;
 
-    public NhanVienTuyenSinh(String name, int age, String gender, String sdt, String email, long salary, long recruitedAmount) {
+    public NhanVienTuyenSinh(String name, String age, String gender, String sdt, String email, long salary, long recruitedAmount) {
         super(name, age, gender, sdt, email, salary);
         this.recruitedAmount = recruitedAmount;
     }

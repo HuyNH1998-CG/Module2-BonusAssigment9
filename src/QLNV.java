@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class QLNV {
     static Scanner input = new Scanner(System.in);
-    static ArrayList<NhanVien> CodeGym = IOOperator.readDataFromFile("src/list.txt");
+    static ArrayList<NhanVien> CodeGym = IOOperator.readDataFromFile("E:\\Module2-BonusAssigment9\\src\\list.txt");
     public static final int nhanVienDaoTao = 1;
     public static final int nhanVienDaoTaoFullTime = 1;
     public static final int nhanVienDaoTaoPartTime = 2;
@@ -13,12 +13,12 @@ public class QLNV {
 
     public static void add() {
         CodeGym.add(createNhanVien());
-        IOOperator.writeToFile("src/list.txt",CodeGym);
+        IOOperator.writeToFile("src/list.txt", CodeGym);
     }
 
     public static NhanVien createNhanVien() {
         String name = getTenNhanVien();
-        int age = getAge();
+        String age = getAge();
         String gender = getGender();
         String phoneNum = getPhoneNum();
         String email = getEmail();
@@ -59,9 +59,9 @@ public class QLNV {
         System.out.println("Nhap ten nhan vien can sua");
         String name = getTenNhanVien();
         NameSorter nameSorter = new NameSorter();
-        int index = Collections.binarySearch(CodeGym, new NhanVien(name, 0, null, null, null, 0), nameSorter);
+        int index = Collections.binarySearch(CodeGym, new NhanVien(name, "0", null, null, null, 0), nameSorter);
         CodeGym.set(index, createNhanVien());
-        IOOperator.writeToFile("src/list.txt",CodeGym);
+        IOOperator.writeToFile("src/list.txt", CodeGym);
     }
 
 
@@ -87,7 +87,7 @@ public class QLNV {
                         }
                     }
                 }
-                IOOperator.writeToFile("src/list.txt",CodeGym);
+                IOOperator.writeToFile("src/list.txt", CodeGym);
             }
             case nhanVienTuyenSinh -> {
                 for (int i = 0; i < CodeGym.size(); i++) {
@@ -98,7 +98,7 @@ public class QLNV {
                         }
                     }
                 }
-                IOOperator.writeToFile("src/list.txt",CodeGym);
+                IOOperator.writeToFile("src/list.txt", CodeGym);
             }
         }
     }
@@ -143,21 +143,34 @@ public class QLNV {
             try {
                 System.out.println("Nhap Email");
                 String email = input.nextLine();
-                for (NhanVien N : CodeGym) {
-                    if (N.getEmail().equals(email)) {
-                        throw new EmailExist();
+                if (EmailRegex.validate(email)) {
+                    for (NhanVien N : CodeGym) {
+                        if (N.getEmail().equals(email)) {
+                            throw new EmailExist();
+                        }
                     }
+                } else {
+                    throw new Exception();
                 }
                 return email;
             } catch (EmailExist e) {
-                System.out.println("Email da duoc su dung");
+                System.err.println("Email da duoc su dung");
+            } catch (Exception e) {
+                System.err.println("Email sai format (vd dung: A@gmail.com)");
             }
         }
     }
 
     private static String getPhoneNum() {
-        System.out.println("Nhap SDT");
-        return input.nextLine();
+        while (true) {
+            System.out.println("Nhap SDT");
+            String phoneNumber = input.nextLine();
+            if (PhoneRegex.validate(phoneNumber)) {
+                return phoneNumber;
+            }else {
+                System.out.println("sai format sdt (sdt phai la (xx)-(0xxxxxxxxx)");
+            }
+        }
     }
 
     private static String getGender() {
@@ -165,24 +178,27 @@ public class QLNV {
             System.out.println("Nhap Gioi Tinh");
             System.out.println("Nam hoac Nu");
             String gender = input.nextLine();
-            if (gender.equals("Nam") || gender.equals("Nu")) {
+            if (GenderRegex.validate(gender)) {
                 return gender;
             } else {
-                System.out.println("Gioi tinh phai la Nam hoac Nu (nam hoac nu cung khong duoc)");
+                System.out.println("Gioi tinh phai la Nam hoac Nu");
             }
         }
     }
 
-    private static int getAge() {
+    private static String getAge() {
         while (true) {
             try {
                 System.out.println("Nhap Tuoi");
-                int age = input.nextInt();
-                input.nextLine();
-                if (age < tuoiGioiHan) {
-                    throw new Under18();
-                } else {
-                    return age;
+                String age = input.nextLine();
+                if (AgeRegex.validate(age)) {
+                    if (Integer.parseInt(age) < tuoiGioiHan) {
+                        throw new Under18();
+                    } else {
+                        return age;
+                    }
+                }else {
+                    throw new Exception();
                 }
             } catch (Under18 e) {
                 System.out.println(e.getMessage());

@@ -9,7 +9,6 @@ public class IOOperator {
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(products);
             oos.close();
-            fos.close();
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -20,7 +19,6 @@ public class IOOperator {
             FileInputStream fis = new FileInputStream(path);
             ObjectInputStream ois = new ObjectInputStream(fis);
             nhanVien = (ArrayList<NhanVien>) ois.readObject();
-            fis.close();
             ois.close();
         } catch (Exception ex){
             ex.printStackTrace();

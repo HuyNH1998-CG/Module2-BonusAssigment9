@@ -1,7 +1,7 @@
 public class NhanVienDaoTaoPartTime extends NhanVienDaoTao{
     public long hourWorked;
 
-    public NhanVienDaoTaoPartTime(String name, int age, String gender, String sdt, String email, long salary, long hourWorked) {
+    public NhanVienDaoTaoPartTime(String name, String age, String gender, String sdt, String email, long salary, long hourWorked) {
         super(name, age, gender, sdt, email, salary);
         this.hourWorked = hourWorked;
     }

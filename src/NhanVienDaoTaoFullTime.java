@@ -1,5 +1,5 @@
 public class NhanVienDaoTaoFullTime extends NhanVienDaoTao{
-    public NhanVienDaoTaoFullTime(String name, int age, String gender, String sdt, String email, long salary) {
+    public NhanVienDaoTaoFullTime(String name, String age, String gender, String sdt, String email, long salary) {
         super(name, age, gender, sdt, email, salary);
     }
 

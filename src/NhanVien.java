@@ -1,15 +1,18 @@
+import java.io.Serial;
 import java.io.Serializable;
 
 public class NhanVien implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1234l;
     private String name;
-    private int age;
+    private String age;
     private String gender;
     private String sdt;
     private String email;
     private long salary;
     private long totalSalary;
 
-    public NhanVien(String name, int age, String gender, String sdt, String email, long salary) {
+    public NhanVien(String name, String age, String gender, String sdt, String email, long salary) {
         this.name = name;
         this.age = age;
         this.gender = gender;
@@ -26,11 +29,11 @@ public class NhanVien implements Serializable {
         this.name = name;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
